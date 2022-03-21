@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {addDoc, collection, getDocs, getFirestore, serverTimestamp, orderBy, query} from "firebase/firestore";
 import {useAuth} from "../../firebase";
 import bg from '../../assets/bg.png'
