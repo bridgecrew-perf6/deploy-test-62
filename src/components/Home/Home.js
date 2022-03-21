@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => {
   return (
     <div className='container' style={{paddingBottom: '30px'}}>
-      <h1 style={{textAlign: 'center'}}>Firebase. С 0 до PRO))</h1>
+      <h1 style={{textAlign: 'center'}}>Firebase. С 0 до PRO))))</h1>
       <h3>1. Authentication</h3>
       <ul>
         <li>Регистрация / логин с помощью емейла и пароля</li>
