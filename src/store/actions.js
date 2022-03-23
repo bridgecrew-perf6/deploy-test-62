@@ -7,7 +7,11 @@ import {
   DELETE_TODO_SUCCESS,
   DELETE_TODO_FAILURE,
   DONE_TODO_SUCCESS,
-  DONE_TODO_FAILURE
+  DONE_TODO_FAILURE,
+  ADD_COUNTRY_FAILURE,
+  ADD_COUNTRY_SUCCESS,
+  GET_COUNTRY_FAILURE,
+  GET_COUNTRY_SUCCESS,
 } from "./actionTypes";
 
 const getTodosSuccess = (data) => {
@@ -67,12 +71,11 @@ export const deleteTodo = (id) => {
 };
 
 const doneTodoSuccess = (data) => {
-  return {type: DELETE_TODO_SUCCESS, data};
+  return {type: DONE_TODO_SUCCESS, data};
 };
 const doneTodoFailure = (error) => {
-  return {type: DELETE_TODO_FAILURE, error};
+  return {type: DONE_TODO_FAILURE, error};
 };
-
 export const doneTodo = (id, body, data) => {
   return async (dispatch) => {
     try {
@@ -83,3 +86,40 @@ export const doneTodo = (id, body, data) => {
     }
   }
 };
+
+const addCountrySuccess = () => {
+  return {type: ADD_COUNTRY_SUCCESS};
+};
+const addCountryFailure = (error) => {
+  return {type: ADD_COUNTRY_FAILURE, error};
+};
+export const addCountry = (data) => {
+  return async (dispatch) => {
+    try {
+      await axiosApi.post('/countries/add', data);
+      dispatch(addCountrySuccess());
+    } catch (e) {
+      dispatch(addCountryFailure(e));
+    }
+  }
+};
+
+const getCountrySuccess = (data) => {
+  return {type: GET_COUNTRY_SUCCESS, data};
+};
+const getCountryFailure = (error) => {
+  return {type: GET_COUNTRY_FAILURE, error};
+};
+export const getCountry = (name) => {
+  let api = name ? '/countries?name=' + name : '/countries'
+  return async (dispatch) => {
+    try {
+      const response = await axiosApi.get(api);
+      dispatch(getCountrySuccess(response.data));
+    } catch (e) {
+      dispatch(getCountryFailure(e));
+    }
+  }
+}
+
+

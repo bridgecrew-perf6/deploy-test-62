@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {storage} from "../../firebase";
 import {ref, uploadBytesResumable, getDownloadURL, deleteObject} from 'firebase/storage';
 import {getFirestore, collection, getDocs, addDoc, doc, deleteDoc} from 'firebase/firestore';
-import ProductCard from "../ProductCard/ProductCard";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import BackdropComponent from "../../components/Backdrop/BackdropComponent";
 import './style.css';
 
 const Products = () => {
@@ -11,6 +12,7 @@ const Products = () => {
   const [file, setFile] = useState(null);
   const [progPercent, setProgPercent] = useState(0);
   const [products, setProducts] = useState([]);
+  const [showBackdrop, setShowBackdrop] = useState(false);
   // подключение к firestore
   const db = getFirestore();
   // ссылка на определенную коллекцию (в данном случае products)
@@ -52,6 +54,7 @@ const Products = () => {
             setPrice('');
             setProgPercent(0);
             setTitle('');
+            setShowBackdrop(false);
           });
       }
     );
@@ -75,6 +78,7 @@ const Products = () => {
   const formSubmit = async (e) => {
     e.preventDefault();
     if (file && title !== '' && price !== '') {
+      setShowBackdrop(true);
       uploadFile(file);
     }
   };
@@ -93,6 +97,7 @@ const Products = () => {
 
   return (
     <div className='products container'>
+      <BackdropComponent term={showBackdrop}/>
       <form className="addProduct" onSubmit={formSubmit}>
         <h3>+ Add Product</h3>
         <input

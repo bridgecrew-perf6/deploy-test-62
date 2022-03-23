@@ -20,7 +20,7 @@ const Header = () => {
           <img src={require('../../assets/firebase-1-logo.png')} alt="" className='logo'/>
           <p>Firebase Auth</p>
         </div>
-        <div className="links">
+        {currentUser && <div className="links">
           <NavLink to='/home' className={({isActive}) => isActive ? "linkActive" : "link"}>
             Home
           </NavLink>
@@ -37,14 +37,14 @@ const Header = () => {
             Todo list
           </NavLink>
           <span style={{color: 'white'}}>/</span>
-          <NavLink to='/blog' className={({isActive}) => isActive ? "linkActive" : "link"}>
-            Blog
+          <NavLink to='/countries' className={({isActive}) => isActive ? "linkActive" : "link"}>
+            Countries
           </NavLink>
           <span style={{color: 'white'}}>/</span>
           <NavLink to='/profile' className={({isActive}) => isActive ? "linkActive" : "link"}>
             Profile
           </NavLink>
-        </div>
+        </div>}
         {currentUser ? <LogoutOutlined onClick={handleLogout} style={{color: 'white', cursor: 'pointer'}}/> : null}
       </div>
     </div>

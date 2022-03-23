@@ -1,23 +1,25 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
+import {useAuth} from "./firebase";
 import Header from "./components/Header/Header";
-import Home from "./components/Home/Home";
-import SignUp from "./components/Login/SignUp";
-import SignIn from "./components/Login/SignIn";
-import Chat from "./components/Chat/Chat";
-import Products from "./components/Products/Products";
-import Profile from "./components/Profile/Profile";
-import TodoList from "./components/TodoList/TodoList";
-import Blog from "./components/Blog/Blog";
+import Home from "./pages/Home/Home";
+import SignUp from "./pages/Login/SignUp";
+import SignIn from "./pages/Login/SignIn";
+import Chat from "./pages/Chat/Chat";
+import Products from "./pages/Products/Products";
+import Profile from "./pages/Profile/Profile";
+import TodoList from "./pages/TodoList/TodoList";
+import Countries from "./pages/Countries/Countries";
 import LoginRoute from "./components/Routes/LoginRoute";
 import NoLoginRoute from "./components/Routes/NoLoginRoute";
-import {useAuth} from "./firebase";
+import BackdropComponent from "./components/Backdrop/BackdropComponent";
 
 function App() {
   const user = useAuth();
   console.log(user);
   return (
     <div className="App">
+      <BackdropComponent term={user === undefined}/>
       <Header/>
       <Routes>
         <Route path='/' element={
@@ -45,10 +47,10 @@ function App() {
             </LoginRoute>
           }/>
         <Route
-          path='/blog'
+          path='/countries'
           element={
             <LoginRoute user={user}>
-              <Blog/>
+              <Countries/>
             </LoginRoute>
           }/>
         <Route

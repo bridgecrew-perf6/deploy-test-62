@@ -7,6 +7,10 @@ import {
   DELETE_TODO_FAILURE,
   DONE_TODO_SUCCESS,
   DONE_TODO_FAILURE,
+  ADD_COUNTRY_FAILURE,
+  ADD_COUNTRY_SUCCESS,
+  GET_COUNTRY_FAILURE,
+  GET_COUNTRY_SUCCESS,
 } from "./actionTypes";
 
 const initialState = {
@@ -15,6 +19,9 @@ const initialState = {
   addTodoError: null,
   deleteTodoError: null,
   doneTodoError: null,
+  countries: [],
+  getCountryError: null,
+  addCountryError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,11 +37,19 @@ const reducer = (state = initialState, action) => {
     case DELETE_TODO_SUCCESS:
       return {...state, todos: state.todos.filter((todo) => todo.id !== action.id), deleteTodoError: null};
     case DELETE_TODO_FAILURE:
-      return {...state, deleteTodoError: action.error}
+      return {...state, deleteTodoError: action.error};
     case DONE_TODO_SUCCESS:
       return {...state, todos: action.data};
     case DONE_TODO_FAILURE:
-      return {...state, doneTodoError: action.error}
+      return {...state, doneTodoError: action.error};
+    case GET_COUNTRY_FAILURE:
+      return {...state, getCountryError: action.error};
+    case GET_COUNTRY_SUCCESS:
+      return {...state, countries: action.data, getCountryError: null};
+    case ADD_COUNTRY_SUCCESS:
+      return {...state, addCountryError: null};
+    case ADD_COUNTRY_FAILURE:
+      return {...state, addCountryError: action.error};
     default:
       return {...state}
   }
