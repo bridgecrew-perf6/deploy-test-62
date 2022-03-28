@@ -8,7 +8,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 
 const Profile = () => {
   const auth = getAuth();
-  // console.log(auth.currentUser);
+  console.log(auth.currentUser);
   const user = auth.currentUser;
   const [file, setFile] = useState(null);
 

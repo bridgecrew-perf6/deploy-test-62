@@ -111,10 +111,9 @@ const getCountryFailure = (error) => {
   return {type: GET_COUNTRY_FAILURE, error};
 };
 export const getCountry = (name) => {
-  let api = name ? '/countries?name=' + name : '/countries'
   return async (dispatch) => {
     try {
-      const response = await axiosApi.get(api);
+      const response = await axiosApi.get("/countries");
       dispatch(getCountrySuccess(response.data));
     } catch (e) {
       dispatch(getCountryFailure(e));

@@ -13,9 +13,10 @@ const TodoList = () => {
   }, [dispatch]);
 
   const todoDone = (id) => {
-    const todo = todos.find((item) => item.id === id);
+    const todosCopy = [...todos];
+    const todo = todosCopy.find((item) => item.id === id);
     todo.done = !todo.done
-    dispatch(doneTodo(id, {done: todo.done}, todos))
+    dispatch(doneTodo(id, {done: todo.done}, todosCopy))
   }
 
   const todosJSX = todos?.map((todo) => {
